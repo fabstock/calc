@@ -37,7 +37,7 @@ jobs:
       run:  pydoc3 -w src/calc.py  
 
     - name: run tests in dir tests  (python -m unittest  discover tests)
-      run: python -m unittest  discover   calc/tests
+      run: python -m unittest  discover   tests
     
     - name: env variable pwd
       run: pwd && ls -altr && echo ${GITHUB_WORKSPACE} 
