@@ -1,34 +1,9 @@
-<<<<<<< HEAD
-name: Create release
-
-on:
-  push:
-    tags:
-      - v*
-
-permissions:
-  contents: write
-
-jobs:
-  release:
-    name: Release pushed tag
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Create release
-        env:
-          GITHUB_TOKEN: {{ github.ref_name }}
-        run: |
-          gh release create "GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --generate-notes
-=======
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Create Release
 
 jobs:
   build:
@@ -51,4 +26,3 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
->>>>>>> cc6a299 (release v0.1)
