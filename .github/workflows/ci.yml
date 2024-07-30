@@ -2,7 +2,8 @@ name: Pydoc and PPP  CI
 
 on:
   #pull_request:
-  branches: [master]
+  push:
+    branches: [master]
     
 
 jobs:
