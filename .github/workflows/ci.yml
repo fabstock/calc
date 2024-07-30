@@ -1,9 +1,9 @@
-name: Pydoc and PPP  CI
+name: Pydoc unittest  CI
 
 on:
   push:
-  #pull_request:
-  #tags:
+    #pull_request:
+    tags:
     #- 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
     branches: [master]
     
