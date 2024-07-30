@@ -1,4 +1,4 @@
-name: Pydoc and PyPPPPPPP  CI
+name: Pydoc and PyPPPP  CI
 
 on:
   pull_request:
@@ -14,12 +14,17 @@ jobs:
    - name: ls -alrt
      run:  ls -alrt
 
-  firstjob:
+  doc:
     steps:
-    - name:
-      use:
+    - name: genere doc  (pydoc3 -w src/calc.py)
+      run:  pydoc3 -w src/calc.py  
+
+  tests:
+    steps:
+    - name: run tests in dir tests  (python -m unittest  discover tests)
+      run: python -m unittest  discover   tests
    
   secondjob:
     steps:
     - name:
-      use:    
+      run: pwd && ls -altr && echo ${{GITHUB_WORKSPACE}}    

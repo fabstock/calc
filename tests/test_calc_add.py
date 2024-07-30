@@ -1,8 +1,10 @@
-
 import unittest
+#from src.calc import addition,substraction,multiplication,division
 from src.calc import addition,substraction,multiplication,division
+#from src.calc import *
 
-class Testing(unittest.TestCase):
+
+class test_calc(unittest.TestCase):
 
     def setUp(self):
         print("Avant le test")
@@ -30,7 +32,12 @@ class Testing(unittest.TestCase):
         self.assertEqual(multiplication(1,2),2)
 
     def test_div(self):
-        self.assertEqual(division(1,2),-0.5)
+        self.assertEqual(division(1,2),0.5)
+
+
+
+def test_sum():
+    assert addition([1, 2, 3]) == 6, "Should be 6"
 
 
 if __name__ == '__main__':

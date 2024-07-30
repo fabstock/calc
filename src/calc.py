@@ -1,15 +1,20 @@
-# -*- coding: utf-8 -*-
-
-#!/usr/bin/python3
-import pydoc
 
 """
+python3 src/calc.py 
+
 This is doc with pydoc.  
 To generate HTML documentation for this module issue the
 command:
+    pydoc3 -w calc
 
-    pydoc -w foo
 """
+
+
+# -*- coding: utf-8 -*-
+#!/usr/bin/python3
+import pydoc
+
+
 
 def saisir():
     """
@@ -28,6 +33,7 @@ def addition(nb1,nb2):
         nb2 est le 2nd nb
     """
     print("add: ",nb1+nb2) 
+    return (nb1+nb2)
 
 def substraction(nb1,nb2):
     """
@@ -36,6 +42,7 @@ def substraction(nb1,nb2):
         nb2 est le 2nd nb
     """
     print("sub: ",nb1-nb2) 
+    return (nb1-nb2)
 
 def division(nb1,nb2):
     """
@@ -44,6 +51,7 @@ def division(nb1,nb2):
         nb2 est le 2nd nb
     """
     print("div: ",nb1/nb2)
+    return (nb1/nb2)
 
 def multiplication(nb1,nb2):
     """
@@ -52,6 +60,7 @@ def multiplication(nb1,nb2):
         nb2 est le 2nd nb
     """
     print("mul: ",nb1*nb2)
+    return (nb1*nb2)
 
 def choix():
     """
@@ -85,11 +94,15 @@ def choix():
 
 
 
-pydoc.writedoc('calc')
+
+def calc():
+  """
+  fonction principale
+  # pydoc.writedoc('calc')
+  """
+  while True:
+    print (choix())
 
 
-while True:
-  print (choix())
-
-
-
+if __name__ == "__main__":
+       calc()
