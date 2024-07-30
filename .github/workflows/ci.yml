@@ -26,5 +26,5 @@ jobs:
    
   secondjob:
     steps:
-    - name:
+    - name: tests variable 
       run: pwd && ls -altr && echo ${{GITHUB_WORKSPACE}}    
