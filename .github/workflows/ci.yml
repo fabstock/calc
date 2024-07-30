@@ -16,11 +16,26 @@ jobs:
    - name: ls -alrt
      run:  ls -alrt
 
+
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+    - name : checkout repo
+      uses: actions/checkout@v3
+
+    - name: affiche variables
+      run: |
+        echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE \
+             GITHUB_PATH: $GITHUB_PATH
+
   doc:
     runs-on: ubuntu-latest
     steps:
     - name: genere doc  (pydoc3 -w src/calc.py)
       run:  pydoc3 -w src/calc.py  
+
+
+
 
   tests:
     runs-on: ubuntu-latest
