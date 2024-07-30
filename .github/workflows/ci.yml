@@ -20,12 +20,6 @@ jobs:
    - name: "🔧 pwd"
      run:  pwd
    
-   - name: Setup Git
-     run: |
-       git config user.name 'Fab Reno'
-       git config user.email 'github@stock.eu.org'
-       # git config gpg.format ssh
-       # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
 
 
   checkout:
@@ -48,4 +42,12 @@ jobs:
     
     - name: "🔍 env variable pwd"
       run: pwd && ls -altr && echo ${GITHUB_WORKSPACE} 
+  
+    - name: Setup Git
+      run: |
+        git config user.name 'Fab Reno'
+        git config user.email 'github@stock.eu.org'
+        # git config gpg.format ssh
+        # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
+
 

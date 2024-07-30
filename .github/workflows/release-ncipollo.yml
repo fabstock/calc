@@ -6,13 +6,16 @@ on:
 jobs:
   new_release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read 
+      deployement: write
     steps:
       - uses: actions/checkout@v4
       - run: echo "apt update image non modifiable"
       - run: ls
       - run: systemd-detect-virt
       - run: env
-      - run: python main.py
       - uses: ncipollo/release-action@v1.14.0
         with:
           artifacts: "release.tar.gz"
