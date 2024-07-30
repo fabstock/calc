@@ -1,0 +1,25 @@
+name: Pydoc and PyPPPPPPP  CI
+
+on:
+  pull_request:
+    branches: [master]
+    
+
+jobs:
+   
+  env:
+   steps:
+   - name: env
+     run : env 
+   - name: ls -alrt
+     run:  ls -alrt
+
+  firstjob:
+    steps:
+    - name:
+      use:
+   
+  secondjob:
+    steps:
+    - name:
+      use:    
