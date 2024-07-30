@@ -26,5 +26,9 @@ jobs:
    
   secondjob:
     steps:
+<<<<<<< HEAD
     - name:
+=======
+    - name: tests variable 
+>>>>>>> 6bc453f (cicd)
       run: pwd && ls -altr && echo ${{GITHUB_WORKSPACE}}    
