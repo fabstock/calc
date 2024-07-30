@@ -2,15 +2,9 @@ name: Pydoc and PPP  CI
 
 on:
   #pull_request:
-<<<<<<< HEAD
     #tags:
     #    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
     branches: [master]
-=======
-  #tags:
-  #    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-  branches: [master]
->>>>>>> 8de648f (suite3)
     
 
 jobs:
