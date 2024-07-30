@@ -17,6 +17,8 @@ jobs:
      run : env 
    - name: ls -alrt
      run:  ls -alrt
+   - name: pwd
+     run:  pwd
 
 
   checkout:
