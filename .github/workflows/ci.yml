@@ -1,4 +1,4 @@
-name: Pydoc and PPPPP  CI
+name: Pydoc and PPP  CI
 
 on:
   pull_request:
