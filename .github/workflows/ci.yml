@@ -8,6 +8,7 @@ on:
 jobs:
    
   env:
+   runs-on: ubuntu-latest
    steps:
    - name: env
      run : env 
@@ -15,16 +16,19 @@ jobs:
      run:  ls -alrt
 
   doc:
+    runs-on: ubuntu-latest
     steps:
     - name: genere doc  (pydoc3 -w src/calc.py)
       run:  pydoc3 -w src/calc.py  
 
   tests:
+    runs-on: ubuntu-latest
     steps:
     - name: run tests in dir tests  (python -m unittest  discover tests)
       run: python -m unittest  discover   tests
    
-  secondjob:
+  variables:
+    runs-on: ubuntu-latest
     steps:
     - name: tests variable 
       run: pwd && ls -altr && echo ${{GITHUB_WORKSPACE}}    
