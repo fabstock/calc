@@ -32,6 +32,8 @@ jobs:
 
   doc:
     runs-on: ubuntu-latest
+    working-directory: ./calc/
+    depends: checkout
     steps:
     - name: genere doc  (pydoc3 -w src/calc.py)
       run:  pydoc3 -w calc/src/calc.py  
@@ -41,6 +43,7 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
+    depends: checkout
     working-directory: ./calc/
     steps:
     - name: run tests in dir tests  (python -m unittest  discover tests)
@@ -55,6 +58,8 @@ jobs:
 
   build:
     name: Create Release
+    working-directory: ./calc/
+    depends: checkout,tests,doc
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
