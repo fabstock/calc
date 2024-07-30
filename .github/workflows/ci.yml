@@ -30,35 +30,19 @@ jobs:
         echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE \
              GITHUB_PATH: $GITHUB_PATH
 
-  doc:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
     - name: genere doc  (pydoc3 -w src/calc.py)
-      working-directory: calc/
       run:  pydoc3 -w calc/src/calc.py  
-
-
-
-
-  tests:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
+    
     - name: run tests in dir tests  (python -m unittest  discover tests)
-      working-directory: calc/
-      run: python -m unittest  discover   tests
-
-  variables:
-    runs-on: ubuntu-latest
-    steps:
-    - name: tests variable 
+      run: python -m unittest  discover   calc/tests
+    
+    - name: env variable pwd
       run: pwd && ls -altr && echo ${GITHUB_WORKSPACE} 
 
 
   build:
     runs-on: ubuntu-latest
-    needs: [checkout,tests,doc]
+    needs: [checkout]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
