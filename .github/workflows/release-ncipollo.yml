@@ -1,0 +1,20 @@
+run-name: ${{ github.actor }} New Release 
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  new_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "apt update image non modifiable"
+      - run: ls
+      - run: systemd-detect-virt
+      - run: env
+      - run: python main.py
+      - uses: ncipollo/release-action@v1.14.0
+        with:
+          artifacts: "release.tar.gz"
+          bodyFile: "README.md"
+
