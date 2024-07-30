@@ -21,6 +21,7 @@ jobs:
 
   checkout:
     runs-on: ubuntu-latest
+    needs: env
     steps:
     - name : checkout repo
       uses: actions/checkout@v3
@@ -29,53 +30,29 @@ jobs:
       run: |
         echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE \
              GITHUB_PATH: $GITHUB_PATH
-
-  doc:
-    runs-on: ubuntu-latest
-    working-directory: ./calc/
-    depends: checkout
-    steps:
     - name: genere doc  (pydoc3 -w src/calc.py)
-      run:  pydoc3 -w calc/src/calc.py  
+      working-directory: ./calc/
+      run:  pydoc3 -w src/calc.py  
 
-
-
-
-  tests:
-    runs-on: ubuntu-latest
-    depends: checkout
-    working-directory: ./calc/
-    steps:
     - name: run tests in dir tests  (python -m unittest  discover tests)
-      run: python -m unittest  discover   tests
-
-  variables:
-    runs-on: ubuntu-latest
-    steps:
-    - name: tests variable 
+      run: python -m unittest  discover   calc/tests
+    
+    - name: env variable pwd
       run: pwd && ls -altr && echo ${GITHUB_WORKSPACE} 
 
-
-  build:
-    name: Create Release
-    working-directory: ./calc/
-    depends: checkout,tests,doc
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
+    - name: Create Release
+      #working-directory: calc/
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
             - First Change
             - Second Change
-          draft: false
-          prerelease: false
+        draft: false
+        prerelease: false
  
