@@ -5,6 +5,10 @@ on: [push]
 jobs:
   write-to-file:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      deployments: write
     
     steps:
       - name: Checkout repository
