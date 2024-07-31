@@ -45,6 +45,11 @@ jobs:
         echo $GITHUB_OUTPUT
         touch calc.html
         echo koko 
+        IFS=$'\n' 
+        for item in $(echo "$INPUT_LINES"); do
+	echo "$item"
+        done
+        unset IFS
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
