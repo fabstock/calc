@@ -98,7 +98,6 @@ def choix():
 def calc():
   """
   fonction principale
-  # pydoc.writedoc('calc')
   """
   while True:
     print (choix())
