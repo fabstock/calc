@@ -9,7 +9,7 @@ jobs:
     permissions:
       contents: write
       issues: read 
-      deployement: write
+      deployments: write
     steps:
       - uses: actions/checkout@v4
       - run: echo "apt update image non modifiable"
