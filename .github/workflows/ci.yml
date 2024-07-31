@@ -68,10 +68,10 @@ jobs:
         #
         ls -altr documentations/
         for file in $(ls documentations/*txt ); do \
-        echo $file ;\
         prefix_name=$(basename $file .txt);\
-        IFS='' \
-        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > $prefix_name.md ;unset IFS ;done
+        echo $file ;\
+        IFS='' ;\
+        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > doumentations/$prefix_name.md ;unset IFS ;done
         ls -altr documentations/
         #
         for item in $(echo $DOC_OUTPUT); do echo $item; done       
