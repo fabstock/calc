@@ -64,7 +64,7 @@ jobs:
 
     - name: Add doc 
       run: |
-        touch calc.*
+        touch calc.html
         git add calc.html
         git commit -m "cal.html documentation pydoc3"
         git push origin master 
