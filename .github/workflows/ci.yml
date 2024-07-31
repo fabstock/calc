@@ -51,7 +51,8 @@ jobs:
         IFS=""
         DOC=$(echo $GITHUB_OUPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
         echo $DOC >doc.md
-        echo ls -altr
+        cat doc.md
+        ls -altr
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
         echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         unset IFS
