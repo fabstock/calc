@@ -72,7 +72,7 @@ jobs:
       run: |
         touch calc.html
         touch doc.md
-        git add calc.html
-        git commit -m "cal.html documentation pydoc3"
+        git add calc.html doc.md
+        git commit -m "cal.html & add md documentation pydoc3"
         git push origin master 
 
