@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@actions/github": "^6.0.0",
     "github": "github:actions/github"
   }
 }
