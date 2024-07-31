@@ -1,3 +1,4 @@
+20240731-16:58:21
 # Help on module calc:
 
 # NAME
@@ -44,6 +45,4 @@
             nb2 est le 2nd nb
 
 # FILE
-## /home/fab/LAMANU/CICD/test/calc/src/calc.py
-
-
+## /home/runner/work/calc/calc/src/calc.py
