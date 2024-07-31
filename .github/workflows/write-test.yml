@@ -1,0 +1,46 @@
+name: Write Variable to File
+#https://hackernoon.com/from-git-flow-to-cicd-a-practical-guide-to-implement-git-workflow
+
+on:
+  push:
+    branch:
+      - "hotfix*"
+      - "master"
+      - "release-*"
+      - "dev"
+      - "features-*"
+    tags:
+      - 'test-write-*'
+      - 'v*'
+
+jobs:
+  write-to-file:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      deployments: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set variable
+        run: |
+          MY_VARIABLE="Ceci est le contenu de la variable"
+          echo "$MY_VARIABLE"
+          echo "$MY_VARIABLE" > my_output_file.txt
+      - name: Display file content
+        run: cat my_output_file.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add my_output_file.txt
+          git commit -m "Add output file with variable content"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
