@@ -46,8 +46,15 @@ jobs:
         touch calc.html
         echo koko 
         IFS="\n" 
-        for item in $(echo $GITHUB_OUTPUT); do echo $item; done 
+        for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
+        sed -e 's/^NAME/# &/' \
+        -e 's/^DESCRIPTION/## &/' \
+        -e 's/^FUNCTIONS/### &/' \
+        -e 's/^FILE/#### &/' \
+        -e 's/^\([0-9]\+\.\) /* &/' \
+        -e 's/^\* /* &/'  doc.txt > doc.md
         unset IFS
+
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
