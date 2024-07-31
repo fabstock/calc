@@ -31,5 +31,6 @@ jobs:
         with:
           artifacts: "release.tar.gz"
           bodyFile: "README.md"
-          files: "calc.html"
+          allowUpdates: true
+
           

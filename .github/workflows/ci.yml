@@ -35,7 +35,8 @@ jobs:
              GITHUB_PATH: $GITHUB_PATH
     - name: "📦 genere doc  (pydoc3 -w src/calc.py)"
       #working-directory: ./calc/
-      run:  pydoc3 -w src/calc.py  
+      run:  pydoc3 -w src/calc.py
+  
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
@@ -50,4 +51,9 @@ jobs:
         # git config gpg.format ssh
         # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
 
+    - name: Add doc 
+        run: |
+          git add calc.htm
+          git commit -m "cal.html documentation pydoc3"
+          git push origin master 
 
