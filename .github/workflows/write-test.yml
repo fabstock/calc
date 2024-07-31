@@ -27,7 +27,8 @@ jobs:
 
       - name: Set variable
         run: |
-          MY_VARIABLE="Ceci est le contenu de la variable"
+          #MY_VARIABLE="Ceci est le contenu de la variable"
+          MY_VARIABLE=$(date +%Y%m%d-%H:%M:%S)
           echo "$MY_VARIABLE"
           echo "$MY_VARIABLE" > my_output_file.txt
       - name: Display file content
