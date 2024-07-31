@@ -1,1 +1,1 @@
-
+Ceci est le contenu de la variable
