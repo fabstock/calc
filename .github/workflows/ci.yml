@@ -35,31 +35,45 @@ jobs:
 
     - name: "🔍 affiche variables"
       run: |
-        echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE GITHUB_PATH: $GITHUB_PATH GITHUB_OUTPUT: $GITHUB_OUTPUT
-    - name: "📦 genere doc  (pydoc3 -w src/calc.py)"
+        echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE 
+        echo GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY 
+        echo GIT_DIR: $GIT_DIR  
+        echo GIT_WORK_TREE: $GIT_WORK_TREE 
+        echo GITHUB_PATH: $GITHUB_PATH 
+        echo GITHUB_OUTPUT: $GITHUB_OUTPUT
+  
+    - name: "📦 genere doc html  (pydoc3 -w src/calc.py)"
       #working-directory: ./calc/
       run: |
-        echo koko
+        echo $(date +%Y%m%d-%H:%M:%S)
         pydoc3 -w src/calc.py
-        touch calc.html
-        echo kuku 
-    - name: transform txt md
+      
+
+    - name: transform doc txt md 
       run: | 
-        echo kiki
-        GITHUB_OUTPUT=$(pydoc3 src/calc.py)
-        echo $GITHUB_OUTPUT
+        echo $(date +%Y%m%d-%H:%M:%S)
+        DOC_OUTPUT=$(pydoc3 src/calc.py)
+        mkdir -p documentations
+        pydoc3 src/calc.py >documentations/doc.txt 
         IFS=""
-        #DOC=$(echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
-        DOC=$( echo "$GITHUB_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
-        echo $(date +%Y%m%d) >doc.md
+        #DOC=$(echo $DOC_OUTPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
+        DOC=$( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
+        echo $(date +%Y%m%d-%H:%M:%S) >doc.md
         echo "${DOC}" >>doc.md
         cat doc.md
-        echo $(date +%Y%m%d) >doc2.md
-        echo $( echo "$GITHUB_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >>doc2.md
+        echo $(date +%Y%m%d-%H:%M:%S) >doc2.md
+        echo $( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >>doc2.md
         cat doc2.md
-        ls -altr
-        for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
-        #echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/'        unset IFS
+        ls -altr documentations/
+        
+        for file in $(ls documentations/*txt ); do \
+        echo $file ;\
+        prefix_name=$(basename $file .txt);\
+        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  >> $prefix_name.md
+        ;done       
+        ls -altr documentations/
+        for item in $(echo $DOC_OUTPUT); do echo $item; done       
+        #echo $DOC_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/'        unset IFS
         git config user.email 'github@stock.eu.org'
         git config user.name 'Fab Reno'
         #git pull 

@@ -1,8 +1,18 @@
 name: Write Variable to File
+#https://hackernoon.com/from-git-flow-to-cicd-a-practical-guide-to-implement-git-workflow
 
-on: [push]
- tags:
-      - 'test-write-*'
+on:
+  push:
+    branch:
+      - "hotfix*"
+      - "master"
+      - "release-*"
+      - "dev"
+      - "features-*"
+  tags:
+    - 'test-write-*'
+    - 'v*'
+
 jobs:
   write-to-file:
     runs-on: ubuntu-latest
@@ -20,7 +30,6 @@ jobs:
           MY_VARIABLE="Ceci est le contenu de la variable"
           echo "$MY_VARIABLE"
           echo "$MY_VARIABLE" > my_output_file.txt
-
       - name: Display file content
         run: cat my_output_file.txt
 
@@ -33,3 +42,5 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
