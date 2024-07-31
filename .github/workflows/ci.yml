@@ -46,8 +46,11 @@ jobs:
       #working-directory: ./calc/
       run: |
         echo $(date +%Y%m%d-%H:%M:%S)
-        pydoc3 -w src/calc.py
-      
+        #pydoc3 -w src/calc.py
+        
+        git fetch origin
+        git checkout -b master
+        git pull origin master
 
     - name: transform doc txt md 
       run: | 
@@ -61,24 +64,25 @@ jobs:
         DOC=$( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
         echo "* $(date +%Y%m%d-%H:%M:%S)" >doc.md
         echo "${DOC}" >>doc.md
-        cat doc.md
+        #cat doc.md
         echo "* $(date +%Y%m%d-%H:%M:%S)" >doc2.md
         echo $( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >>doc2.md
-        cat doc2.md
-        for item in $(echo $DOC_OUTPUT); do echo $item; done       
+        #cat doc2.md
+        #for item in $(echo $DOC_OUTPUT); do echo $item; done       
         unset IFS        
         ls -altr documentations/
         for file in $(ls documentations/*txt ); do \
         prefix_name=$(basename $file .txt);\
         echo $file ;\
         IFS='' ;\
-        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > documentations/$prefix_name.md ;unset IFS ;done
+        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > documentations/$prefix_name.md ;\
+        unset IFS ;\
+        done
         ls -altr documentations/
         #
         #echo $DOC_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         git config user.email 'github+bot-actions@stock.eu.org'
         git config user.name 'Fab Reno'
-        git pull 
         touch calc.html   doc*.md 
         git add calc.html doc*.md -A
         git add  -A documentations/\*.md
