@@ -71,7 +71,7 @@ jobs:
         prefix_name=$(basename $file .txt);\
         echo $file ;\
         IFS='' ;\
-        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > doumentations/$prefix_name.md ;unset IFS ;done
+        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > documentations/$prefix_name.md ;unset IFS ;done
         ls -altr documentations/
         #
         for item in $(echo $DOC_OUTPUT); do echo $item; done       
