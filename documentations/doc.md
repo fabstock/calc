@@ -17,7 +17,6 @@
     
 ## calc()
 ### fonction principale
-### # pydoc.writedoc('calc')
     
 ## choix()
 ### choix des opérations arithmétiques.

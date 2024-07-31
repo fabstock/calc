@@ -1,4 +1,4 @@
-20240731-18:51:22
+20240731-19:01:11
 # Help on module calc:
 
 # NAME
@@ -18,7 +18,6 @@
     
 ## calc()
 ### fonction principale
-### # pydoc.writedoc('calc')
     
 ## choix()
 ### choix des opérations arithmétiques.
