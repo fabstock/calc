@@ -48,9 +48,9 @@ jobs:
         echo $(date +%Y%m%d-%H:%M:%S)
         #pydoc3 -w src/calc.py
         
-        git fetch origin
-        git checkout -b master
-        git pull origin master
+        #git fetch origin
+        #git checkout -b master
+        #git pull origin master
 
     - name: transform doc txt md 
       run: | 
