@@ -51,9 +51,11 @@ jobs:
         IFS=""
         #DOC=$(echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
         DOC=$( echo "$GITHUB_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
-        echo "${DOC}" >doc.md
+        echo $(date +%Y%m%d) >doc.md
+        echo "${DOC}" >>doc.md
         cat doc.md
-        echo $( echo "$GITHUB_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >doc2.md
+        echo $(date +%Y%m%d) >doc2.md
+        echo $( echo "$GITHUB_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >>doc2.md
         cat doc2.md
         ls -altr
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
@@ -61,6 +63,7 @@ jobs:
         git config user.email 'github@stock.eu.org'
         git config user.name 'Fab Reno'
         #git pull 
+        touch calc.html   doc*.md 
         git add calc.html doc*.md
         git commit -m "cal.html & add md documentation pydoc3"
         git push origin master 
