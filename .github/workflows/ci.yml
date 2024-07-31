@@ -80,7 +80,9 @@ jobs:
         git config user.name 'Fab Reno'
         #git pull 
         touch calc.html   doc*.md 
-        git add calc.html doc*.md
+        git add calc.html doc*.md -A
+        git add  -A documentations/\*.md
+        git add  -A documentations/\*.txt
         git commit -m "cal.html & add md documentation pydoc3"
         git push origin master 
         # git config gpg.format ssh
