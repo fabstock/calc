@@ -46,9 +46,7 @@ jobs:
         touch calc.html
         echo koko 
         IFS="\n" 
-        for item in $(echo $GITHUB_OUTPUT); do
-	echo $item
-        done
+        for item in $(echo $GITHUB_OUTPUT); do echo $item; done 
         unset IFS
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
