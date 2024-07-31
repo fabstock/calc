@@ -3,7 +3,7 @@ name: Pydoc unittest  C2I
 on:
   push:
     #pull_request:
-    tags:
+    #tags:
     #- 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
     branches: [master]
     
@@ -78,7 +78,7 @@ jobs:
         #echo $DOC_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         git config user.email 'github@stock.eu.org'
         git config user.name 'Fab Reno'
-        #git pull 
+        git pull 
         touch calc.html   doc*.md 
         git add calc.html doc*.md -A
         git add  -A documentations/\*.md
