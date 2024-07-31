@@ -1,0 +1,33 @@
+name: Write Variable to File
+
+on: [push]
+
+jobs:
+  write-to-file:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set variable
+        run: |
+          MY_VARIABLE="Ceci est le contenu de la variable"
+          echo "$MY_VARIABLE"
+
+      - name: Write variable to file
+        run: |
+          echo "$MY_VARIABLE" > my_output_file.txt
+
+      - name: Display file content
+        run: cat my_output_file.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add my_output_file.txt
+          git commit -m "Add output file with variable content"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
