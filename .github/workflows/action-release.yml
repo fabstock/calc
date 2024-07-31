@@ -1,0 +1,40 @@
+run-name: ${{ github.actor }} action-release  test Pre draf Release
+on:
+  push:
+    tags:
+      - 'pre-release-v*'
+jobs:
+
+  new_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      deployments: write
+    steps:
+
+      - name: Output Run ID
+        run: echo ${{ github.run_id }}
+      - name: Output Run Number
+        run: echo ${{ github.run_number }}
+      - name: Output Run Attempt
+        run: echo ${{ github.run_attempt }}
+      - name: tag ?
+        run: echo ${{ github.ref_name }}
+
+      - uses: actions/checkout@v4
+
+
+- name: Release
+      uses: sondreb/action-release@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        files: "action.js;README.md"
+        folder: "${{github.workspace}}/package/"
+        draft: true
+        prerelease: true
+        body: 'This is a pre-release'
+        name: "Draft Release"
+        #tag: v0.0.1
+        tag: ${{ github.ref_name }}
+
