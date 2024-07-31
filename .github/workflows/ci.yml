@@ -55,13 +55,14 @@ jobs:
         DOC_OUTPUT=$(pydoc3 src/calc.py)
         mkdir -p documentations
         pydoc3 src/calc.py >documentations/doc.txt 
+        pydoc3 src/calc.py >documentations/doc2.txt 
         IFS=""
         #DOC=$(echo $DOC_OUTPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
         DOC=$( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
-        echo $(date +%Y%m%d-%H:%M:%S) >doc.md
+        echo "* $(date +%Y%m%d-%H:%M:%S)" >doc.md
         echo "${DOC}" >>doc.md
         cat doc.md
-        echo $(date +%Y%m%d-%H:%M:%S) >doc2.md
+        echo "* $(date +%Y%m%d-%H:%M:%S)" >doc2.md
         echo $( echo "$DOC_OUTPUT" | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /') >>doc2.md
         cat doc2.md
         for item in $(echo $DOC_OUTPUT); do echo $item; done       
