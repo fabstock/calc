@@ -53,7 +53,7 @@ jobs:
 
     - name: Add doc 
       run: |
-        git add calc.htm
+        git add calc.html
         git commit -m "cal.html documentation pydoc3"
         git push origin master 
 
