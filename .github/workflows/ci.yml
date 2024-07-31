@@ -68,10 +68,11 @@ jobs:
         for file in $(ls documentations/*txt ); do \
         echo $file ;\
         prefix_name=$(basename $file .txt);\
-        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  >> $prefix_name.md;done
+        cat $file| sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /'  > $prefix_name.md ;done
         ls -altr documentations/
         for item in $(echo $DOC_OUTPUT); do echo $item; done       
-        #echo $DOC_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/'        unset IFS
+        #echo $DOC_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
+        unset IFS
         git config user.email 'github@stock.eu.org'
         git config user.name 'Fab Reno'
         #git pull 
