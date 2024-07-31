@@ -4,6 +4,7 @@ on:
     tags:
       - 'v*'
 jobs:
+    
   new_release:
     runs-on: ubuntu-latest
     permissions:
@@ -11,6 +12,16 @@ jobs:
       issues: read 
       deployments: write
     steps:
+
+      - name: Output Run ID
+        run: echo ${{ github.run_id }}
+      - name: Output Run Number
+        run: echo ${{ github.run_number }}
+      - name: Output Run Attempt
+        run: echo ${{ github.run_attempt }}
+      - name: tag ?
+        run: echo ${{ github.ref_name }}
+
       - uses: actions/checkout@v4
       - run: echo "apt update image non modifiable"
       - run: ls
@@ -20,4 +31,5 @@ jobs:
         with:
           artifacts: "release.tar.gz"
           bodyFile: "README.md"
-
+          files: "calc.html"
+          
