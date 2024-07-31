@@ -3,7 +3,7 @@ name: Write Variable to File
 
 on:
   push:
-    branch:
+    branches:
       - "hotfix*"
       - "master"
       - "release-*"
