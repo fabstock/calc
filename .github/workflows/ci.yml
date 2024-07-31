@@ -45,9 +45,9 @@ jobs:
         echo $GITHUB_OUTPUT
         touch calc.html
         echo koko 
-        IFS=$'\n' 
-        for item in $(echo "$INPUT_LINES"); do
-	echo "$item"
+        IFS="\n" 
+        for item in $(echo $GITHUB_OUTPUT); do
+	echo $item
         done
         unset IFS
 
