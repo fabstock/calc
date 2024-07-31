@@ -35,30 +35,25 @@ jobs:
 
     - name: "🔍 affiche variables"
       run: |
-        echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE \
-             GITHUB_PATH: $GITHUB_PATH GITHUB_OUTPUT: $GITHUB_OUTPUT
+       echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE GITHUB_ACTION_REPOSITORY: $GITHUB_ACTION_REPOSITORY GIT_DIR: $GIT_DIR  GIT_WORK_TREE: $GIT_WORK_TREE GITHUB_PATH: $GITHUB_PATH GITHUB_OUTPUT: $GITHUB_OUTPUT
     - name: "📦 genere doc  (pydoc3 -w src/calc.py)"
       #working-directory: ./calc/
       run: |
+        echo koko
         pydoc3 -w src/calc.py
-        GITHUB_OUTPUT=$(pydoc3 src/calc.py)
-        
-	echo $GITHUB_OUTPUT
         touch calc.html
-        echo koko 
+        echo kuku 
+    - name: transform txt md
+      run: | 
+        echo kiki
+        GITHUB_OUTPUT=$(pydoc3 src/calc.py)
+        echo $GITHUB_OUTPUT
         IFS=""
         DOC=$(echo $GITHUB_OUPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
         echo $DOC >doc.md
- 
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
-        echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' \
-        -e 's/^DESCRIPTION/## &/' \
-        -e 's/^FUNCTIONS/### &/' \
-        -e 's/^FILE/#### &/' \
-        -e 's/^\([0-9]\+\.\) /* &/' \
-        -e 's/^\* /* &/' 
+        echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         unset IFS
-
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
