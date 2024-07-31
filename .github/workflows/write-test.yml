@@ -18,9 +18,6 @@ jobs:
         run: |
           MY_VARIABLE="Ceci est le contenu de la variable"
           echo "$MY_VARIABLE"
-
-      - name: Write variable to file
-        run: |
           echo "$MY_VARIABLE" > my_output_file.txt
 
       - name: Display file content
