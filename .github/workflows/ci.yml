@@ -56,6 +56,9 @@ jobs:
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
         echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         unset IFS
+        git add calc.html doc.md
+        git commit -m "cal.html & add md documentation pydoc3"
+        git push origin master 
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
@@ -73,9 +76,4 @@ jobs:
     - name: Add doc 
       run: |
         ls -altr
-        touch calc.html
-        touch doc.md
-        git add calc.html doc.md
-        git commit -m "cal.html & add md documentation pydoc3"
-        git push origin master 
 
