@@ -49,13 +49,13 @@ jobs:
         GITHUB_OUTPUT=$(pydoc3 src/calc.py)
         echo $GITHUB_OUTPUT
         IFS=""
-        DOC=$(echo $GITHUB_OUPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
+        #DOC=$(echo $GITHUB_OUPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
+        DOC=$( echo $GITHUB_OUPUT | sed -e '/^[^ ]/s/^/# /'     -e '/^    [^ ]/s/^    /## /'      -e '/^        [^ ]/s/^        /### /')
         echo $DOC >doc.md
         cat doc.md
         ls -altr
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
-        echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
-        unset IFS
+        #echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/'        unset IFS
         git config user.email 'github@stock.eu.org'
         git config user.name 'Fab Reno'
         git add calc.html doc.md
