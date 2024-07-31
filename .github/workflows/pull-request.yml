@@ -3,7 +3,7 @@ name: PR Workflow and Post Merge
 on:
   pull_request:
     branches:
-j     - master
+      - master
       - main
   push:
     branches:
