@@ -52,8 +52,8 @@ jobs:
         # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
 
     - name: Add doc 
-        run: |
-          git add calc.htm
-          git commit -m "cal.html documentation pydoc3"
-          git push origin master 
+       run: |
+         git add calc.htm
+         git commit -m "cal.html documentation pydoc3"
+         git push origin master 
 
