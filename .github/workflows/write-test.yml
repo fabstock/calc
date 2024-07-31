@@ -1,7 +1,8 @@
 name: Write Variable to File
 
 on: [push]
-
+ tags:
+      - 'test-write-*'
 jobs:
   write-to-file:
     runs-on: ubuntu-latest
