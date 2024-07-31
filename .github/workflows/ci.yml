@@ -42,17 +42,21 @@ jobs:
       run: |
         pydoc3 -w src/calc.py
         GITHUB_OUTPUT=$(pydoc3 src/calc.py)
-        echo $GITHUB_OUTPUT
+        
+	echo $GITHUB_OUTPUT
         touch calc.html
         echo koko 
-        IFS="\n" 
+        IFS=""
+        DOC=$(echo $GITHUB_OUPUT | sed -e 's/^NAME/# &/'  -e 's/^DESCRIPTION/## &/' -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/')
+        echo $DOC >doc.md
+ 
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
-        sed -e 's/^NAME/# &/' \
+        echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' \
         -e 's/^DESCRIPTION/## &/' \
         -e 's/^FUNCTIONS/### &/' \
         -e 's/^FILE/#### &/' \
         -e 's/^\([0-9]\+\.\) /* &/' \
-        -e 's/^\* /* &/'  doc.txt > doc.md
+        -e 's/^\* /* &/' 
         unset IFS
 
 
@@ -72,6 +76,7 @@ jobs:
     - name: Add doc 
       run: |
         touch calc.html
+        touch doc.md
         git add calc.html
         git commit -m "cal.html documentation pydoc3"
         git push origin master 
