@@ -39,11 +39,12 @@ jobs:
              GITHUB_PATH: $GITHUB_PATH GITHUB_OUTPUT: $GITHUB_OUTPUT
     - name: "📦 genere doc  (pydoc3 -w src/calc.py)"
       #working-directory: ./calc/
-      run:  pydoc3 -w src/calc.py
-      run:  GITHUB_OUTPUT=$(pydoc3 src/calc.py)
-      run:  echo $GITHUB_OUTPUT
-      run:  touch calc.html
-      run:  echo koko 
+      run: |
+        pydoc3 -w src/calc.py
+        GITHUB_OUTPUT=$(pydoc3 src/calc.py)
+        echo $GITHUB_OUTPUT
+        touch calc.html
+        echo koko 
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
