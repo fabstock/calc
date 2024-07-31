@@ -56,9 +56,13 @@ jobs:
         for item in $(echo $GITHUB_OUTPUT); do echo $item; done       
         echo $GITHUB_OUTPUT | sed -e 's/^NAME/# &/' -e 's/^DESCRIPTION/## &/'  -e 's/^FUNCTIONS/### &/' -e 's/^FILE/#### &/'  -e 's/^\([0-9]\+\.\) /* &/'  -e 's/^\* /* &/' 
         unset IFS
+        git config user.email 'github@stock.eu.org'
+        git config user.name 'Fab Reno'
         git add calc.html doc.md
         git commit -m "cal.html & add md documentation pydoc3"
         git push origin master 
+        # git config gpg.format ssh
+        # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
 
     - name: "🔍 run tests in dir tests  (python -m unittest  discover tests)"
       run: python -m unittest  discover   tests
@@ -66,12 +70,6 @@ jobs:
     - name: "🔍 env variable pwd"
       run: pwd && ls -altr && echo ${GITHUB_WORKSPACE} 
   
-    - name: Setup Git
-      run: |
-        git config user.name 'Fab Reno'
-        git config user.email 'github@stock.eu.org'
-        # git config gpg.format ssh
-        # git config user.signingKey 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHnlMYthrlF2PhdLMI78hMx51wq0l8P2L82JOaOLwQ81 fab@localhost'
 
     - name: Add doc 
       run: |
