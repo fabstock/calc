@@ -1,0 +1,41 @@
+name: Auto Merge PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Merge Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        BRANCH=$(jq --raw-output .pull_request.head.ref "$GITHUB_EVENT_PATH")
+        REPO=$(jq --raw-output .repository.full_name "$GITHUB_EVENT_PATH")
+
+        echo "PR_NUMBER: $PR_NUMBER"
+        echo "BRANCH: $BRANCH"
+        echo "REPO: $REPO"
+
+        # Get the status of the PR
+        PR_STATUS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER" | jq -r .mergeable)
+
+        echo "PR_STATUS: $PR_STATUS"
+
+        if [ "$PR_STATUS" == "true" ]; then
+          # Merge the pull request
+          curl -s -X PUT -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" \
+            -d '{"commit_title": "Auto-merged PR #'"$PR_NUMBER"'", "merge_method": "squash"}' \
+            "https://api.github.com/repos/$REPO/pulls/$PR_NUMBER/merge"
+        else
+          echo "Pull request is not mergeable"
+          exit 1
+        fi
+
