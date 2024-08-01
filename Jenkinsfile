@@ -19,7 +19,7 @@ pipeline {
             steps {
                 // Construction du projet (par exemple, avec Maven)
                 //sh 'mvn clean install'
-                 sh 'echo build'
+                echo build
             }
         }
         
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Exécution des tests (si applicable)
                 //sh 'mvn test'
-                 sh 'echo test'
+                echo test
             }
         }
         
@@ -50,4 +50,8 @@ pipeline {
             echo 'Pipeline succeeded!'
         }
         failure {
-
+            // Actions à effectuer si le pipeline échoue
+            echo 'Pipeline failed!'
+        }
+    }
+}
